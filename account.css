@@ -17,6 +17,24 @@ main {
   justify-content: center;
 }
 
+.header {
+  background-color: #F06300;
+}
+
+.headerButton {
+  color: white;
+  padding: 5%;
+  border-radius: 6px;
+}
+
+.headerButton:hover {
+  color: #F06300;
+  background-color: white;
+  padding: 5%;
+  transition: 0.75s;
+  border-radius: 6px;
+}
+
 /* Logo, Company Name, Wallet Address, and Join Date */
 #profile-info {
   border-bottom: 2px solid #D9D9D9;
