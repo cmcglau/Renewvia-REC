@@ -28,6 +28,9 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700;900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+	<!-- Icons -->
+	<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="main.css">
 	<link rel="stylesheet" href="account.css">
@@ -62,9 +65,14 @@
 				<div class="profile-info-right">
 					<div class="company-name">{{ name }}</div>
 					<div class="company-technical">
-						<a class="address" rel="external" target="_blank" :href="`https://bscscan.com/address/${address}`">{{ smallAddress }}</a>
+						<p>Account Id: <a class="address" rel="external" target="_blank" :href="`https://bscscan.com/address/${address}`">{{ smallAddress }}</a></p>
 						<div class="date">Joined {{ join_date }}</div>
 					</div>
+				</div>
+				<div class="transaction-buttons">
+					<a class="retire" href="https://forms.office.com/Pages/ResponsePage.aspx?id=Ydc7R_ArakyrYud4pmPU-t4U5WxHzZBLmCpkuvMSmgpUOEtEUTRGS1ZaV09CTDM1VjlMOVJTNFpOWi4u">Retire Current Credits</a>
+					<a class="credits" href="https://forms.office.com/Pages/ResponsePage.aspx?id=Ydc7R_ArakyrYud4pmPU-t4U5WxHzZBLmCpkuvMSmgpUOEtEUTRGS1ZaV09CTDM1VjlMOVJTNFpOWi4u">Mark Credits for sale</a>
+					<a class="purchase" href="https://forms.office.com/Pages/ResponsePage.aspx?id=Ydc7R_ArakyrYud4pmPU-t4U5WxHzZBLmCpkuvMSmgpUOEtEUTRGS1ZaV09CTDM1VjlMOVJTNFpOWi4u">Purchase New Credits</a>
 				</div>
 			</section>
 			<!-- End Basic Profile Info -->
@@ -72,95 +80,171 @@
 			<!-- Start of Widget Grid -->
 			<div class="grid-container">
 				<div class="grid-item">
-					<!-- Big, Orange "My Impact" Bar -->
+					<!-- My Impact -->
 						<div class="my-impact">
-							<h2>My Impact</h2>
-							<div class="impact-container">
-								<div class="offset">
-									<div class="texts">
-										<h3>Approximate amount of carbon offset</h3>
-										<p>{{ totalEstimatedCarbonOffsets.toLocaleString() }} tCO2e</p>
-
+							<div class="widget-title">
+								<h2>My Impact</h2>
+							</div>
+							<div class="impact-body">
+								<div class="stats">
+									<div class="stats-left">
+										<div class="statistic">
+											<div class="texts">
+												<p>Approximate amount of carbon offset: </p>
+											</div>
+											<div class="stat">
+												<p>{{ totalEstimatedCarbonOffsets.toLocaleString() }} tCO2e</p>
+											</div>
+										</div>
+										<div class="statistic">
+											<div class="texts">
+												<p>Total amount of renewable energy generation: </p>
+											</div>
+											<div class="stat">
+												<p>{{ totalRenewableEnergy.toLocaleString() }} MWh</p>
+											</div>
+										</div>
 									</div>
-									<div class="icon">
-										<i class="fas fa-leaf leaf-icon"></i>
+									<div class="stats-right">
+										<div class="statistic">
+											<div class="texts">
+												<p>Asset with most generation: </p>
+											</div>
+											<div class="stat">
+												<p>Virginia</p>
+											</div>
+										</div>
+										<div class="statistic">
+											<div class="texts">
+												<p>Asset with least generation: </p>
+											</div>
+											<div class="stat">
+												<p>Alabama</p>
+											</div>
+										</div>
 									</div>
 								</div>
-								<div class="generation">
-									<div class="texts">
-										<h3>Total amount of renewable energy generation</h3>
-										<p>{{ totalRenewableEnergy.toLocaleString() }} MWh</p>
-									</div>
-									<div class="icon">
-										<i class="fas fa-solar-panel solar-icon"></i>
-									</div>
+								<div id="line-chart">
+									<canvas ref="lineChart" class="impact-line-chart"></canvas>
 								</div>
+							</div>
+							<div class="expand-container">
+								<button class="expand-button">
+									<div class="expand-text">
+										<p>Expand</p>
+									</div>
+									<div class="expand-icon">
+										<i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+									</div>
+								</button>
 							</div>
 						</div>
 					<!-- end impact section -->
 				</div>
 				<div class="grid-item">
 					<!-- Carbon Assets -->
-					<section class="widget" v-if="assets && assets.length > 0">
-						<h2>Carbon Assets</h2>
-						<div id="allassets">
-							<div class="assets" v-for="asset in assets" :key="asset.id">
-								<details>
-									<summary>
-										<span class="name">{{ asset.name }}</span>
-										<span class="qty">{{ asset.amount }}</span>
-										<span class="more">More...</span>
-									</summary>
-									<div class="more-details">
-										<span class="image"><img
-												:src="asset.img"
-												:alt="Image"></span>
-										<span class="details">
-											<p>{{ asset.description}}</p>
-										</span>
-									</div>
-								</details>
-							</div>
+					<div class="carbon" v-if="assets && assets.length > 0">
+						<div class="widget-title">
+							<h2>Your Carbon Assets</h2>
 						</div>
-					</section>
+						<div class="assets" v-for="asset in assets" :key="asset.id">
+							<details>
+								<summary>
+									<span class="name">{{ asset.name }}</span>
+									<span class="qty">{{ asset.amount }}</span>
+									<span class="more">More...</span>
+								</summary>
+								<div class="more-details">
+									<span class="image"><img
+											:src="asset.img"
+											:alt="Image"></span>
+									<span class="details">
+										<p>{{ asset.description}}</p>
+									</span>
+								</div>
+							</details>
+						</div>
+					</div>
 				</div>
 				<div class="grid-item">
 					<!-- Activity -->
-					<section class="widget" v-if="activity && activity.length > 0">
-						<h2>Activity</h2>
-						<table>
-							<thead>
-								<tr>
-									<th>Date</th>
-									<th>Asset</th>
-									<th>Action</th>
-									<th>Amount</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-
-							<tbody>
-								<tr class="assets" v-for="trans in activity" :key="trans.address">
-									<td>{{trans.date}}</td>
-									<td>{{trans.name}}</td>
-									<td>{{trans.action}}</td>
-									<td>{{trans.amount}}</td>
-									<td><a class="verified-btn" target="_blank" rel="external" :href="`https://bscscan.com/tx/${trans.hash}`">Verified</a></td>
-								</tr>
-							</tbody>
-						</table>
-					</section>
+					<div class="activity">
+						<div class="widget-title">
+							<h2>Activity</h2>
+						</div>
+						<div class="activity-stats">
+							<div class="activity-statistic">
+								<div class="activity-texts">
+									<p>Total Generation: </p>
+								</div>
+								<div class="activity-stat">
+									<p>5000</p>
+								</div>
+							</div>
+							<div class="activity-statistic">
+								<div class="activity-texts">
+									<p>Amount Purchased: </p>
+								</div>
+								<div class="activity-stat">
+									<p>3000</p>
+								</div>
+							</div>
+							<div class="activity-statistic">
+								<div class="activity-texts">
+									<p>Total Retired: </p>
+								</div>
+								<div class="activity-stat">
+									<p>3000</p>
+								</div>
+							</div>
+						</div>
+						<div class="table-container">
+							<div class="scrolldiv">
+								<table>
+									<thead>
+										<tr>
+											<th>Date</th>
+											<th>Asset</th>
+											<th>Action</th>
+											<th>Amount</th>
+											<th>Status</th>
+										</tr>
+									</thead>
+		
+									<tbody>
+										<tr class="assets" v-for="trans in activity" :key="trans.address">
+											<td>{{trans.date}}</td>
+											<td>{{trans.name}}</td>
+											<td>{{trans.action}}</td>
+											<td>{{trans.amount}}</td>
+											<td><a class="verified-btn" target="_blank" rel="external" :href="`https://bscscan.com/tx/${trans.hash}`">Verified</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="expand-container">
+							<button class="expand-button">
+								<div class="expand-text">
+									<p>Expand</p>
+								</div>
+								<div class="expand-icon">
+									<i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+								</div>
+							</button>
+						</div>
+					</div>
 				</div>
 				<div class="grid-item">
-					<!-- Chart -->
-					<section class="widget" v-if="assets && assets.length > 0">
-						<h2>Portfolio Distribution</h2>
+					<!-- Portfolio Distribution -->
+					<div class="portfolio" v-if="assets && assets.length > 0">
+						<div class="widget-title">
+							<h2>Portfolio Distribution</h2>
+						</div>
 						<div id="pie-chart">
 							<div>
 								<canvas ref="myChart"></canvas>
 							</div>
-
-
 							<ul class="key">
 								<li v-for="asset in assets" :key="asset.id">
 									<strong class="percent gray">{{ calculatePercentage(asset.amount) }}%</strong>
@@ -168,12 +252,21 @@
 								</li>
 							</ul>
 						</div>
-					</section>
-					<!-- end of chart -->
+						<div class="expand-container">
+							<button class="expand-button">
+								<div class="expand-text">
+									<p>Expand</p>
+								</div>
+								<div class="expand-icon">
+									<i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+								</div>
+							</button>
+						</div>
+					</div>
 				</div>
 				<div class="grid-item">
-					<!-- Goal -->
-					<section class="widget" v-if="carbon_goal">
+					<!-- Progress -->
+					<div class="progress" v-if="carbon_goal">
 						<h2>Progress Toward Your Carbon Goal</h2>
 						<div class="center-contents">
 							<div class="goal-progress">
@@ -192,17 +285,10 @@
 							</ul>
 						</div>
 						<p class="goal-instructions">{{instructionsToAchieveCarbonGoal}}</p>
-					</section>
+					</div>
 				</div>
 			</div>
 			<!-- End of Widget Grid -->
-			<section class="widget" id="transaction-buttons">
-				<a class="retire-purchase" rel="external" target="_blank" href="https://forms.office.com/Pages/ResponsePage.aspx?id=Ydc7R_ArakyrYud4pmPU-t4U5WxHzZBLmCpkuvMSmgpUOEtEUTRGS1ZaV09CTDM1VjlMOVJTNFpOWi4u">
-					<div class="retire">Retire Current Credits</div>
-					<div class="credits">Mark Credits for sale</div>
-					<div class="purchase">Purchase New Credits</div>
-				</a>
-			</section>
 		</main>
 	</div>
 

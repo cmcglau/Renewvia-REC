@@ -20,7 +20,8 @@ const app = Vue.createApp({
 			assets: [],
 			activity: [],
 			retired_carbon: 0,
-			chart: null
+			chart: null,
+			lineChart: null,
 		}
 	},
 
@@ -126,6 +127,9 @@ const app = Vue.createApp({
 		if (!this.chart) {
 			this.renderChart();
 		}
+		if (!this.lineChart) {
+			this.renderLineChart();
+		}
 
 		// Update carbon goal progress
 		if (this.carbon_goal) {
@@ -188,7 +192,6 @@ const app = Vue.createApp({
 			const totalQuantity = this.assets.reduce((total, asset) => total + asset.amount, 0)
 			return Math.round(100 * quantity / totalQuantity)
 		},
-
 		renderChart() {
 			if (this.$refs.myChart && this.assets && this.assets.length > 0) {
 				const ctx = this.$refs.myChart.getContext("2d");
@@ -212,6 +215,86 @@ const app = Vue.createApp({
 						options: {
 							responsive: true,
 							maintainAspectRatio: false,
+						},
+					});
+				}
+			}
+		},
+		renderLineChart() {
+			if (this.$refs.lineChart && this.assets && this.assets.length > 0) {
+				console.log("Darin is here");
+				console.log(this.assets);
+				const ctx = this.$refs.lineChart.getContext("2d");
+				const xValues = [50,60,70,80,90,100,110,120,130,140,150];
+				if (ctx) {
+					this.lineChart = new Chart(ctx, {
+						type: "line",
+						data: {
+							labels: xValues,
+							datasets: [{
+								data: [860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
+								label: 'test 1',
+								borderColor: "red",
+								fill: false
+							  },{
+								data: [1600,1700,1700,1900,2000,2700,4000,5000,6000,7000],
+								label: 'test 2',
+								borderColor: "green",
+								fill: false
+							  },{
+								data: [300,700,2000,5000,6000,4000,2000,1000,200,100],
+								label: 'test 3',
+								borderColor: "blue",
+								fill: false
+							  }]
+						},
+						options: {
+							plugins: {
+								legend: {
+									position: 'right',
+									labels: {
+										padding: 20,
+										color: '#292929',
+										font: {
+											size: 16
+										}
+									}
+								},
+								title: {
+									display: true,
+									text: 'Asset Generation Over Time',
+									position: 'top',
+									color: '#292929',
+									align: 'center',
+									font: {
+										size: 18
+									}
+								}
+							},
+							scales: {
+								y: {
+									grid: {
+										color: '#292929'
+									},
+									ticks: {
+										color: '#292929',
+										font: {
+											size: 16
+										}
+									}
+								},
+								x: {
+									grid: {
+										color: '#292929'
+									},
+									ticks: {
+										color: '#292929',
+										font: {
+											size: 16
+										}
+									}
+								}
+							}
 						},
 					});
 				}
