@@ -76,6 +76,36 @@
 				</div>
 			</section>
 			<!-- End Basic Profile Info -->
+			
+			<!-- Impact Popover -->
+			<div popover id="impactPopover" class="impactPopover">
+				impact test
+			</div>
+			<!-- End of Impact Popover -->
+
+			<!-- Activity Popover -->
+			<div popover id="activityPopover" class="activityPopover">
+				activity test
+			</div>
+			<!-- End of Activity Popover -->
+
+			<!-- Carbon Popover -->
+			<div popover id="carbonPopover" class="carbonPopover">
+				carbon test
+			</div>
+			<!-- End of carbon Popover -->
+
+			<!-- Portfolio Popover -->
+			<div popover id="portfolioPopover" class="portfolioPopover">
+				portfolio test
+			</div>
+			<!-- End of Portfolio Popover -->
+
+			<!-- Progress Popover -->
+			<div popover id="progressPopover" class="progressPopover">
+				progress test
+			</div>
+			<!-- End of Progress Popover -->
 
 			<!-- Start of Widget Grid -->
 			<div class="grid-container">
@@ -129,7 +159,7 @@
 								</div>
 							</div>
 							<div class="expand-container">
-								<button class="expand-button">
+								<button class="expand-button" popovertarget="impactPopover">
 									<div class="expand-text">
 										<p>Expand</p>
 									</div>
@@ -163,6 +193,16 @@
 									</span>
 								</div>
 							</details>
+						</div>
+						<div class="expand-container">
+							<button class="expand-button" popovertarget="carbonPopover">
+								<div class="expand-text">
+									<p>Expand</p>
+								</div>
+								<div class="expand-icon">
+									<i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+								</div>
+							</button>
 						</div>
 					</div>
 				</div>
@@ -224,7 +264,7 @@
 							</div>
 						</div>
 						<div class="expand-container">
-							<button class="expand-button">
+							<button class="expand-button" popovertarget="activityPopover">
 								<div class="expand-text">
 									<p>Expand</p>
 								</div>
@@ -253,7 +293,7 @@
 							</ul>
 						</div>
 						<div class="expand-container">
-							<button class="expand-button">
+							<button class="expand-button" popovertarget="portfolioPopover">
 								<div class="expand-text">
 									<p>Expand</p>
 								</div>
@@ -285,6 +325,16 @@
 							</ul>
 						</div>
 						<p class="goal-instructions">{{instructionsToAchieveCarbonGoal}}</p>
+						<div class="expand-container">
+							<button class="expand-button" popovertarget="progressPopover">
+								<div class="expand-text">
+									<p>Expand</p>
+								</div>
+								<div class="expand-icon">
+									<i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+								</div>
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>

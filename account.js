@@ -221,32 +221,90 @@ const app = Vue.createApp({
 			}
 		},
 		renderLineChart() {
-			if (this.$refs.lineChart && this.assets && this.assets.length > 0) {
+			if (this.$refs.lineChart && this.activity.length > 0) {
 				console.log("Darin is here");
-				console.log(this.assets);
+				console.log(this.activity);
+				const yearArray = [];
+				const assetsArray = [];
+				const assetMap = new Map();
+				const assetNumMap = new Map();
+				let assetNum = 0;
+
+				// Find number of different assets
+				for (let k = 0; k < this.activity.length; k++) {
+					if (!assetsArray.includes(this.activity[k].name) && this.activity[k].action == "Generation") {
+						assetsArray.push(this.activity[k].name);
+						assetMap.set(this.activity[k].name, assetNum);
+						assetNumMap.set(assetNum, this.activity[k].name);
+						assetNum++;
+					}
+					if (!yearArray.includes(parseInt(this.activity[k].date.substring(2,4))) && this.activity[k].action == "Generation") {
+						yearArray.push(parseInt(this.activity[k].date.substring(2,4)));
+					}
+				}
+
+				const numAssets = assetsArray.length;
+
+				const xValues = [];
+				const yValues = [];
+
+				for (let m = 0; m < numAssets; m++) {
+					yValues.push([0]);
+				}
+
+				// Generating x values 
+				for (let i = yearArray[0]; i < yearArray[0] + yearArray.length + 1; i++) {
+					xValues.push(i + 2000);
+				}
+
+				// Generating y values by parsing activity data
+				for (let j = 0; j < this.activity.length; j++) {
+					let tempName = "";
+					let tempNum = -1;
+					let tempYear = -1;
+					if (this.activity[j].action == "Generation") {
+						tempName = this.activity[j].name;
+						tempNum = assetMap.get(tempName);
+						tempYear = parseInt(this.activity[j].date.substring(2,4));
+						if (yValues[tempNum][yearArray.indexOf(tempYear)]) {
+							yValues[tempNum][yearArray.indexOf(tempYear)] += this.activity[j].amount;
+						}
+						else {
+							yValues[tempNum][yearArray.indexOf(tempYear)] = this.activity[j].amount;
+						}
+							
+					}
+				}
+				console.log("xValues");
+				console.log(xValues);
+				console.log("yValues");
+				console.log(yValues);
+				console.log("numAssets");
+				console.log(numAssets);
+				console.log("assetMap");
+				console.log(assetMap);
+
+				const datasets = [];
+
+				for (let h = 0; h < numAssets; h++) {
+					console.log("darin is here");
+					console.log(yValues[h]);
+					datasets.push({
+						data: yValues[h],
+						label: assetNumMap.get(h),
+						borderColor: 'red',
+						fill: false,
+					});
+				}
+
 				const ctx = this.$refs.lineChart.getContext("2d");
-				const xValues = [50,60,70,80,90,100,110,120,130,140,150];
+				//const xValues = [50,60,70,80,90,100,110,120,130,140,150];
 				if (ctx) {
 					this.lineChart = new Chart(ctx, {
 						type: "line",
 						data: {
 							labels: xValues,
-							datasets: [{
-								data: [860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
-								label: 'test 1',
-								borderColor: "red",
-								fill: false
-							  },{
-								data: [1600,1700,1700,1900,2000,2700,4000,5000,6000,7000],
-								label: 'test 2',
-								borderColor: "green",
-								fill: false
-							  },{
-								data: [300,700,2000,5000,6000,4000,2000,1000,200,100],
-								label: 'test 3',
-								borderColor: "blue",
-								fill: false
-							  }]
+							datasets: datasets,
 						},
 						options: {
 							plugins: {
