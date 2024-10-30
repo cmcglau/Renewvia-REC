@@ -177,22 +177,26 @@
 						<div class="widget-title">
 							<h2>Your Carbon Assets</h2>
 						</div>
-						<div class="assets" v-for="asset in assets" :key="asset.id">
-							<details>
-								<summary>
-									<span class="name">{{ asset.name }}</span>
-									<span class="qty">{{ asset.amount }}</span>
-									<span class="more">More...</span>
-								</summary>
-								<div class="more-details">
-									<span class="image"><img
-											:src="asset.img"
-											:alt="Image"></span>
-									<span class="details">
-										<p>{{ asset.description}}</p>
-									</span>
+						<div class="carbon-content">
+							<div class="carbon-scrolldiv">
+								<div class="assets" v-for="asset in assets" :key="asset.id">
+									<details>
+										<summary>
+											<span class="name">{{ asset.name }}</span>
+											<span class="qty">{{ asset.amount }}</span>
+											<span class="more">More...</span>
+										</summary>
+										<div class="more-details">
+											<span class="image"><img
+													:src="asset.img"
+													:alt="Image"></span>
+											<span class="details">
+												<p>{{ asset.description}}</p>
+											</span>
+										</div>
+									</details>
 								</div>
-							</details>
+							</div>
 						</div>
 						<div class="expand-container">
 							<button class="expand-button" popovertarget="carbonPopover">
@@ -281,7 +285,7 @@
 						<div class="widget-title">
 							<h2>Portfolio Distribution</h2>
 						</div>
-						<div id="pie-chart">
+						<div id="pie-chart" class="pie-chart">
 							<div>
 								<canvas ref="myChart"></canvas>
 							</div>
@@ -307,7 +311,9 @@
 				<div class="grid-item">
 					<!-- Progress -->
 					<div class="progress" v-if="carbon_goal">
-						<h2>Progress Toward Your Carbon Goal</h2>
+						<div class="widget-title">
+							<h2>Progress Toward Your Carbon Goal</h2>
+						</div>
 						<div class="center-contents">
 							<div class="goal-progress">
 								<div class="outer center-contents">

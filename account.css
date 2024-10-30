@@ -147,12 +147,17 @@ main {
 /* Universal Widget Styles */
 .widget-title {
   margin: 0.5em;
-  height: 0.5em;
+  height: 5%;
 }
 .expand-container {
   display: flex;
   justify-content: flex-end;
   align-self: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 .expand-button {
   display: flex;
@@ -179,13 +184,14 @@ main {
 
 /* impact section */
 .my-impact {
-  display: inline-block;
+  display: flex;
   flex-direction: column;
   color: white;
   height: 100%;
   width: 100%;
   background-color: #FF8C00;
   border-radius: 6px;
+  overflow: hidden;
 }
 .my-impact .impact-body {
   height: 68%;
@@ -231,18 +237,26 @@ main {
 
 /* Activity Section */
 .activity {
+  display: inline-flex;
+  flex-direction: column;
   background-color: #FF8C00;
   border-radius: 6px;
   color: white;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 .activity-stats {
+  display: inline-flex;
+  flex-direction: column;
+  margin-left: 3%;
+  margin-bottom: 3%;
   height: 10%;
   justify-items: center;
 }
 .activity-statistic {
   display: flex;
+  position: relative;
   width: 80%;
   flex-direction: row;
   max-height: 1em;
@@ -256,7 +270,7 @@ main {
 }
 .activity .table-container {
   width: 100%;
-  height: 73%;
+  height: 65%;
   justify-items: center;
 }
 .activity .table-container .scrolldiv {
@@ -306,22 +320,105 @@ main {
 
 /* Portfolio Distribution Section */
 .portfolio {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   background-color: #FF8C00;
   border-radius: 6px;
   color: white;
   width: 100%;
-  height: 63%;
+  height: 70%;
   align-self: flex-start;
+}
+.pie-chart {
+  margin-top: 10%;
 }
 /* End of Portfolio Distribution Section */
 
 /* Carbon Assets Section */
 .carbon {
+  display: inline-flex;
+  flex-direction: column;
+  overflow: hidden;
   background-color: #FF8C00;
   border-radius: 6px;
   color: white;
   width: 100%;
   height: 100%;
+}
+.carbon .carbon-content {
+  margin-top: 10%;
+  height: 65%;
+  justify-items: center;
+}
+.carbon .carbon-content .carbon-scrolldiv {
+  width: 95%;
+  min-height: 90%;
+  height: 90%;
+  overflow-y: scroll;
+}
+.carbon .carbon-content .assets {
+  border-collapse: collapse;
+  width: 100%;
+  box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.6rem;
+  background-color: #292929;
+}
+.carbon .carbon-content .assets details {
+  display: flex;
+  flex-direction: column;
+}
+.carbon .carbon-content .assets details summary {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #ccc;
+}
+.carbon .carbon-content .assets details summary span {
+  width: 33%;
+}
+.carbon .carbon-content .assets details summary .name {
+  font-weight: 300;
+  font-size: 1rem;
+}
+.carbon .carbon-content .assets details summary .qty {
+  text-align: right;
+  font-weight: 300;
+}
+.carbon .carbon-content .assets details summary .more {
+  color: #F06300;
+  font-size: 1.2rem;
+  font-weight: 300;
+  text-align: right;
+}
+.carbon .carbon-content .assets details summary .more:hover {
+  cursor: pointer;
+}
+.carbon .carbon-content .assets details .more-details {
+  display: flex;
+  border-bottom: 2px solid #ccc;
+  width: 90%;
+  margin: 0 auto;
+}
+.carbon .carbon-content .assets details .more-details span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 300;
+  text-align: center;
+}
+.carbon .carbon-content .assets details .more-details span img {
+  border-radius: 1.5rem;
+  width: 13rem;
+}
+.carbon .carbon-content .assets details .more-details span.image {
+  width: 30%;
+}
+.carbon .carbon-content .assets details .more-details span.details {
+  width: 60%;
+  color: white;
 }
 /* End of Carbon Assets Section */
 
@@ -331,8 +428,44 @@ main {
   border-radius: 6px;
   color: white;
   width: 100%;
-  height: 60%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
   align-self: flex-start;
+}
+.progress .center-contents {
+  margin-top: 3%;
+}
+.progress .center-contents .goal-progress {
+  width: var(--progress-circle-diameter);
+  height: var(--progress-circle-diameter);
+  position: relative;
+  margin: 2rem 0;
+}
+.progress .center-contents .goal-progress .outer {
+  width: var(--progress-circle-diameter);
+  height: var(--progress-circle-diameter);
+  border-radius: 50%;
+  display: flex;
+}
+.progress .center-contents .goal-progress .outer .inner {
+  position: absolute;
+  height: calc(var(--progress-circle-diameter) - 2 * var(--progress-circle-thickness));
+  width: calc(var(--progress-circle-diameter) - 2 * var(--progress-circle-thickness));
+  border-radius: 50%;
+}
+.progress .center-contents .goal-progress .outer svg {
+  position: absolute;
+}
+.progress .center-contents .goal-progress .outer svg circle {
+  fill: none;
+  stroke-width: var(--progress-circle-thickness);
+}
+.progress .center-contents .goal-progress .outer svg circle.retired {
+  stroke: var(--green);
+}
+.progress .center-contents .goal-progress .outer svg circle.total {
+  stroke: var(--orange);
 }
 /* End of Progress Section */
 
