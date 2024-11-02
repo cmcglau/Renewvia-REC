@@ -222,8 +222,6 @@ const app = Vue.createApp({
 		},
 		renderLineChart() {
 			if (this.$refs.lineChart && this.activity.length > 0) {
-				console.log("Darin is here");
-				console.log(this.activity);
 				const yearArray = [];
 				const assetsArray = [];
 				const assetMap = new Map();
@@ -275,14 +273,6 @@ const app = Vue.createApp({
 							
 					}
 				}
-				console.log("xValues");
-				console.log(xValues);
-				console.log("yValues");
-				console.log(yValues);
-				console.log("numAssets");
-				console.log(numAssets);
-				console.log("assetMap");
-				console.log(assetMap);
 
 				const datasets = [];
 
@@ -298,6 +288,8 @@ const app = Vue.createApp({
 				}
 
 				const ctx = this.$refs.lineChart.getContext("2d");
+				console.log('ctx is here');
+				console.log(ctx);
 				//const xValues = [50,60,70,80,90,100,110,120,130,140,150];
 				if (ctx) {
 					this.lineChart = new Chart(ctx, {

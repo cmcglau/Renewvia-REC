@@ -189,7 +189,7 @@ main {
   color: white;
   height: 100%;
   width: 100%;
-  background-color: #FF8C00;
+  background-color: #f06300;
   border-radius: 6px;
   overflow: hidden;
 }
@@ -239,7 +239,7 @@ main {
 .activity {
   display: inline-flex;
   flex-direction: column;
-  background-color: #FF8C00;
+  background-color: #f06300;
   border-radius: 6px;
   color: white;
   width: 100%;
@@ -323,7 +323,7 @@ main {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-color: #FF8C00;
+  background-color: #f06300;
   border-radius: 6px;
   color: white;
   width: 100%;
@@ -340,7 +340,7 @@ main {
   display: inline-flex;
   flex-direction: column;
   overflow: hidden;
-  background-color: #FF8C00;
+  background-color: #f06300;
   border-radius: 6px;
   color: white;
   width: 100%;
@@ -424,7 +424,7 @@ main {
 
 /* Progress Section */
 .progress {
-  background-color: #FF8C00;
+  background-color: #f06300;
   border-radius: 6px;
   color: white;
   width: 100%;

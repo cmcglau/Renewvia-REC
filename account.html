@@ -79,7 +79,61 @@
 			
 			<!-- Impact Popover -->
 			<div popover id="impactPopover" class="impactPopover">
-				impact test
+				<div class="my-impact">
+					<div class="widget-title">
+						<h2>My Impact</h2>
+					</div>
+					<div class="impact-body">
+						<div class="stats">
+							<div class="stats-left">
+								<div class="statistic">
+									<div class="texts">
+										<p>Approximate amount of carbon offset: </p>
+									</div>
+									<div class="stat">
+										<p>{{ totalEstimatedCarbonOffsets.toLocaleString() }} tCO2e</p>
+									</div>
+								</div>
+								<div class="statistic">
+									<div class="texts">
+										<p>Total amount of renewable energy generation: </p>
+									</div>
+									<div class="stat">
+										<p>{{ totalRenewableEnergy.toLocaleString() }} MWh</p>
+									</div>
+								</div>
+							</div>
+							<div class="stats-right">
+								<div class="statistic">
+									<div class="texts">
+										<p>Asset with most generation: </p>
+									</div>
+									<div class="stat">
+										<p>Virginia</p>
+									</div>
+								</div>
+								<div class="statistic">
+									<div class="texts">
+										<p>Asset with least generation: </p>
+									</div>
+									<div class="stat">
+										<p>Alabama</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="line-chart">
+							<canvas ref="lineChart" class="impact-line-chart"></canvas>
+						</div>
+					</div>
+					<div class="expand-container">
+						<button class="expand-button" popovertarget="impactPopover">
+							<div class="expand-text">
+								<p>Close</p>
+							</div>
+						</button>
+					</div>
+				</div>
 			</div>
 			<!-- End of Impact Popover -->
 
@@ -97,7 +151,32 @@
 
 			<!-- Portfolio Popover -->
 			<div popover id="portfolioPopover" class="portfolioPopover">
-				portfolio test
+				<div class="portfolio" v-if="assets && assets.length > 0">
+					<div class="widget-title">
+						<h2>Portfolio Distribution</h2>
+					</div>
+					<div id="pie-chart" class="pie-chart">
+						<div>
+							<canvas ref="myChart"></canvas>
+						</div>
+						<ul class="key">
+							<li v-for="asset in assets" :key="asset.id">
+								<strong class="percent gray">{{ calculatePercentage(asset.amount) }}%</strong>
+								<span class="choice">{{ asset.name+'s' }}</span>
+							</li>
+						</ul>
+					</div>
+					<div class="expand-container">
+						<button class="expand-button" popovertarget="portfolioPopover">
+							<div class="expand-text">
+								<p>Expand</p>
+							</div>
+							<div class="expand-icon">
+								<i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+							</div>
+						</button>
+					</div>
+				</div>
 			</div>
 			<!-- End of Portfolio Popover -->
 
