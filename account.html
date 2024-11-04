@@ -397,19 +397,25 @@
 							<div class="goal-progress">
 								<div class="outer center-contents">
 									<div class="inner"></div>
-									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%">
-										<circle id="total-carbon" class="total" cx="50%" cy="50%" r="42.5%" stroke-linecap="round" />
-										<circle id="retired-carbon" class="retired" cx="50%" cy="50%" r="42.5%" stroke-linecap="round" />
-									</svg>
-								</div>
+											<div class="progress-bar-container">
+												<span class="progress-label start">0%</span>
+												<div id="progress-bar" class="progress-bar">
+												  <div id="total-progress" class="progress-bar__total">
+													<div id="retired-progress" class="progress-bar__retired"></div>
+													<div id="indicator" class="progress-indicator">75%</div>
+												  </div>
+												</div>
+												<span class="progress-label end">100%</span>
+											  </div>
+								</div><p class="goal-instructions">{{instructionsToAchieveCarbonGoal}}</p>
 							</div>
-							<ul class="key">
+							<!-- <ul class="key">
 								<li><div class="label retired"></div>Credits Retired</li>
 								<li><div class="label total"></div>Credits Owned</li>
 								<li><div class="label remaining"></div>Credits Remaining</li>
-							</ul>
+							</ul> -->
 						</div>
-						<p class="goal-instructions">{{instructionsToAchieveCarbonGoal}}</p>
+						
 						<div class="expand-container">
 							<button class="expand-button" popovertarget="progressPopover">
 								<div class="expand-text">

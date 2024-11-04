@@ -132,11 +132,38 @@ const app = Vue.createApp({
 		}
 
 		// Update carbon goal progress
+		// if (this.carbon_goal) {
+		// 	console.log(this.retired_carbon)
+		// 	document.getElementById('retired-carbon').setAttribute('stroke-dasharray', `${Math.round(FULL_GOAL_CIRCLE * Math.min(this.retired_carbon / this.carbon_goal, 1))}, 999`)
+		// 	document.getElementById('total-carbon').setAttribute('stroke-dasharray', `${Math.round(FULL_GOAL_CIRCLE * Math.min((this.retired_carbon + this.totalCarbonOffsets) / this.carbon_goal, 1))} 999`)
+		// }
+		// if (this.carbon_goal) {
+		// 	const retiredPercentage = Math.min((this.retired_carbon / this.carbon_goal) * 100, 100);
+		// 	const totalPercentage = Math.min(((this.retired_carbon + this.totalCarbonOffsets) / this.carbon_goal) * 100, 100);
+		  
+		// 	// Update the retired carbon progress
+		// 	document.getElementById('retired-progress').style.width = `${retiredPercentage}%`;
+		  
+		// 	// Update the total carbon offsets progress
+		// 	document.getElementById('total-progress').style.width = `${totalPercentage}%`;
+		//   }
 		if (this.carbon_goal) {
-			console.log(this.retired_carbon)
-			document.getElementById('retired-carbon').setAttribute('stroke-dasharray', `${Math.round(FULL_GOAL_CIRCLE * Math.min(this.retired_carbon / this.carbon_goal, 1))}, 999`)
-			document.getElementById('total-carbon').setAttribute('stroke-dasharray', `${Math.round(FULL_GOAL_CIRCLE * Math.min((this.retired_carbon + this.totalCarbonOffsets) / this.carbon_goal, 1))} 999`)
-		}
+			const retiredPercentage = Math.min((this.retired_carbon / this.carbon_goal) * 100, 100);
+			const totalPercentage = Math.min(((this.retired_carbon + this.totalCarbonOffsets) / this.carbon_goal) * 100, 100);
+		  
+			// Update retired carbon progress
+			const retiredProgress = document.getElementById('retired-progress');
+			retiredProgress.style.width = `${retiredPercentage}%`;
+		  
+			// Update total carbon progress
+			const totalProgress = document.getElementById('total-progress');
+			totalProgress.style.width = `${totalPercentage}%`;
+		  
+			// Update indicator position and text
+			const indicator = document.getElementById('indicator');
+			indicator.style.left = `${retiredPercentage}%`;
+			indicator.textContent = `${Math.round(retiredPercentage)}%`;
+		  }
 	},
 
 	computed: {
