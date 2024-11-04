@@ -41,7 +41,7 @@ main {
   display: flex;
   flex-direction: row;
   padding: 2rem 2rem 2rem 2rem;
-  width: 90%;
+  width: auto;
   margin-bottom: 1rem;
 }
 #profile-info .logo-container {
