@@ -139,13 +139,94 @@
 
 			<!-- Activity Popover -->
 			<div popover id="activityPopover" class="activityPopover">
-				activity test
+				<div class="activity">
+					<div class="widget-title">
+						<h2>Activity</h2>
+					</div>
+					<div class="activity-stats">
+						<div class="activity-statistic">
+							<div class="activity-texts">
+								<p>Total Generation: </p>
+							</div>
+							<div class="activity-stat">
+								<p>5000</p>
+							</div>
+						</div>
+						<div class="activity-statistic">
+							<div class="activity-texts">
+								<p>Amount Purchased: </p>
+							</div>
+							<div class="activity-stat">
+								<p>3000</p>
+							</div>
+						</div>
+						<div class="activity-statistic">
+							<div class="activity-texts">
+								<p>Total Retired: </p>
+							</div>
+							<div class="activity-stat">
+								<p>3000</p>
+							</div>
+						</div>
+					</div>
+					<div class="table-container">
+						<div class="scrolldiv">
+							<table>
+								<thead>
+									<tr>
+										<th>Date</th>
+										<th>Asset</th>
+										<th>Action</th>
+										<th>Amount</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+	
+								<tbody>
+									<tr class="assets" v-for="trans in activity" :key="trans.address">
+										<td>{{trans.date}}</td>
+										<td>{{trans.name}}</td>
+										<td>{{trans.action}}</td>
+										<td>{{trans.amount}}</td>
+										<td><a class="verified-btn" target="_blank" rel="external" :href="`https://bscscan.com/tx/${trans.hash}`">Verified</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 			</div>
 			<!-- End of Activity Popover -->
 
 			<!-- Carbon Popover -->
 			<div popover id="carbonPopover" class="carbonPopover">
-				carbon test
+				<!-- Carbon Assets -->
+				<div class="carbon" v-if="assets && assets.length > 0">
+					<div class="widget-title">
+						<h2>Your Carbon Assets</h2>
+					</div>
+					<div class="carbon-content">
+							<div class="assets" v-for="asset in assets" :key="asset.id">
+								<details>
+									<summary>
+										<span class="name">{{ asset.name }}</span>
+										<span class="qty">{{ asset.amount }}</span>
+										<span class="more">More...</span>
+									</summary>
+									<div class="more-details">
+										<span class="image"><img
+												:src="asset.img"
+												:alt="Image"></span>
+										<span class="details">
+											<p>{{ asset.description}}</p>
+										</span>
+									</div>
+								</details>
+							</div>
+
+					</div>
+				
+				</div>
 			</div>
 			<!-- End of carbon Popover -->
 
@@ -395,8 +476,7 @@
 						</div>
 						<div class="center-contents">
 							<div class="goal-progress">
-								<div class="outer center-contents">
-									<div class="inner"></div>
+									<div class="inner">
 											<div class="progress-bar-container">
 												<span class="progress-label start">0%</span>
 												<div id="progress-bar" class="progress-bar">
@@ -406,8 +486,8 @@
 												  </div>
 												</div>
 												<span class="progress-label end">100%</span>
-											  </div>
-								</div><p class="goal-instructions">{{instructionsToAchieveCarbonGoal}}</p>
+											  </div></div>
+								<p class="goal-instructions">{{instructionsToAchieveCarbonGoal}}</p>
 							</div>
 							<!-- <ul class="key">
 								<li><div class="label retired"></div>Credits Retired</li>
