@@ -161,12 +161,12 @@ main {
 .expand-button {
   display: flex;
   flex-direction: row;
-  height: 3em;
+  height: 2.5em;
   width: 8em;
   background-color: #292929;
   color: white;
   align-items: center;
-  margin: 1em;
+  margin: 0.3em;
   border-radius: 6px;
   justify-content: center;
   box-shadow: none;
@@ -351,15 +351,18 @@ background: linear-gradient(180deg, #ff8c00, #ff9f2a);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 }
 .carbon .carbon-content {
-  margin-top: 10%;
-  height: 65%;
+  margin-top: 1em; /* Reduced margin for better alignment */
+  height: 200%;
   justify-items: center;
+  overflow-y: auto; /* Added overflow-y for better scrolling behavior */
+  padding: 1em; /* Added padding to prevent overlap with edges */
 }
 .carbon .carbon-content .carbon-scrolldiv {
   width: 95%;
-  min-height: 90%;
-  height: 90%;
-  overflow-y: scroll;
+  height: 100%;
+  overflow-y: auto; /* Keeps scroll confined within this section */
+  padding-right: 1em; /* Adds space for scrollbar */
+  max-height: 800px; /* Set a max height to ensure it does not expand too much */
 }
 .carbon .carbon-content .assets {
   border-collapse: collapse;
@@ -367,6 +370,7 @@ background: linear-gradient(180deg, #ff8c00, #ff9f2a);
   box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.2);
   border-radius: 0.6rem;
   background-color: #292929;
+  height: auto; /* Allows each asset to resize based on content */
 }
 .carbon .carbon-content .assets details {
   display: flex;
@@ -537,6 +541,9 @@ background: linear-gradient(180deg, #ff8c00, #ff9f2a);
 .impactPopover {
   width: 90%;
   height: 90%;
+  
+   
+  
 }
 /* End of Impact Popover */
 
