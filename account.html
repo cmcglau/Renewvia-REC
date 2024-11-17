@@ -279,44 +279,6 @@
 								<h2>My Impact</h2>
 							</div>
 							<div class="impact-body">
-								<div class="stats">
-									<div class="stats-left">
-										<div class="statistic">
-											<div class="texts">
-												<p>Approximate amount of carbon offset: </p>
-											</div>
-											<div class="stat">
-												<p>{{ totalEstimatedCarbonOffsets.toLocaleString() }} tCO2e</p>
-											</div>
-										</div>
-										<div class="statistic">
-											<div class="texts">
-												<p>Total amount of renewable energy generation: </p>
-											</div>
-											<div class="stat">
-												<p>{{ totalRenewableEnergy.toLocaleString() }} MWh</p>
-											</div>
-										</div>
-									</div>
-									<div class="stats-right">
-										<div class="statistic">
-											<div class="texts">
-												<p>Asset with most generation: </p>
-											</div>
-											<div class="stat">
-												<p>Virginia</p>
-											</div>
-										</div>
-										<div class="statistic">
-											<div class="texts">
-												<p>Asset with least generation: </p>
-											</div>
-											<div class="stat">
-												<p>Alabama</p>
-											</div>
-										</div>
-									</div>
-								</div>
 								<div id="line-chart">
 									<canvas ref="lineChart" class="impact-line-chart"></canvas>
 								</div>
@@ -347,7 +309,7 @@
 										<summary>
 											<span class="name">{{ asset.name }}</span>
 											<span class="qty">{{ asset.amount }}</span>
-											<span class="more">More...</span>
+											<!-- <span class="more">More...</span> -->
 										</summary>
 										<div class="more-details">
 											<span class="image"><img
@@ -379,31 +341,9 @@
 						<div class="widget-title">
 							<h2>Activity</h2>
 						</div>
-						<div class="activity-stats">
-							<div class="activity-statistic">
-								<div class="activity-texts">
-									<p>Total Generation: </p>
-								</div>
-								<div class="activity-stat">
-									<p>5000</p>
-								</div>
-							</div>
-							<div class="activity-statistic">
-								<div class="activity-texts">
-									<p>Amount Purchased: </p>
-								</div>
-								<div class="activity-stat">
-									<p>3000</p>
-								</div>
-							</div>
-							<div class="activity-statistic">
-								<div class="activity-texts">
-									<p>Total Retired: </p>
-								</div>
-								<div class="activity-stat">
-									<p>3000</p>
-								</div>
-							</div>
+						<div>
+							<h1>
+							</h1>
 						</div>
 						<div class="table-container">
 							<div class="scrolldiv">
@@ -452,12 +392,6 @@
 							<div>
 								<canvas ref="myChart"></canvas>
 							</div>
-							<ul class="key">
-								<li v-for="asset in assets" :key="asset.id">
-									<strong class="percent gray">{{ calculatePercentage(asset.amount) }}%</strong>
-									<span class="choice">{{ asset.name+'s' }}</span>
-								</li>
-							</ul>
 						</div>
 						<div class="expand-container">
 							<button class="expand-button" popovertarget="portfolioPopover">
@@ -499,16 +433,6 @@
 							</ul> -->
 						</div>
 						
-						<div class="expand-container">
-							<button class="expand-button" popovertarget="progressPopover">
-								<div class="expand-text">
-									<p>Expand</p>
-								</div>
-								<div class="expand-icon">
-									<i class="fa-solid fa-up-right-and-down-left-from-center"></i>
-								</div>
-							</button>
-						</div>
 					</div>
 				</div>
 			</div>
